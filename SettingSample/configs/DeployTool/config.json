@@ -1,0 +1,60 @@
+{
+  "OriginalPath": "E:\\code\\CAMS\\CAMS",
+  "TargetPath": "C:\\Users\\gulu.ITSOWER\\Desktop\\版更檔案\\CAMS",
+  "LastWriteTime": "2020-03-20T15:17:27",
+  "LastExecuteTime": "2020-11-27T10:21:42.180403+08:00",
+  "Projects": [
+    {
+      "ProjectPath": "Batch\\bin\\Release",
+      "TargetPath": "Batch\\batch",
+      "Selected": true,
+      "IgnoreRules": null
+    },
+    {
+      "ProjectPath": "WinService\\bin\\Release",
+      "TargetPath": "Service\\WinService",
+      "Selected": false,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "Housekeeping\\bin\\Release",
+      "TargetPath": "Batch\\Housekeeping",
+      "Selected": true,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "Management",
+      "TargetPath": "WebAp\\Web",
+      "Selected": true,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "InitialDataTransfer\\bin\\Release",
+      "TargetPath": "InitialDataTransfer",
+      "Selected": true,
+      "IgnoreRules": ""
+    }
+  ],
+  "IgnoreRules": ".git\r\n.vs\r\n.gitignore\r\nobj\r\nProperties\r\n*.csproj\r\n*.user\r\n*.vspscc",
+  "IsIgnoreCs": true,
+  "IsIgnoreConfig": true,
+  "IsKeepEmptyDir": false,
+  "IsCompression": true,
+  "IsBuild": true,
+  "IsCopyToFtp": false,
+  "CompressionPassword": "",
+  "FtpUrl": "ftp://192.168.100.135",
+  "FtpUserName": "itsower",
+  "FtpPassword": "html5!its",
+  "FtpPath": "/home/CAMS/Test",
+  "IsPublishToFtp": false,
+  "PublishFtpUrl": "ftp://192.168.100.135",
+  "PublishFtpUserName": "itsower",
+  "PublishFtpPassword": "html5!its",
+  "PublishFtpPath": "/home/CAMS/Test",
+  "IsPublishToDisk": true,
+  "DiskPath": "Y:\\CAMS",
+  "BuildConfiguration": "Release",
+  "MsBuildPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\MsBuild.exe",
+  "SlnPath": "E:\\code\\CAMS\\CAMS\\CAMS.sln"
+}

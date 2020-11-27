@@ -1,0 +1,60 @@
+{
+  "OriginalPath": "C:\\github\\DeployTool",
+  "TargetPath": "C:\\Test",
+  "LastWriteTime": "2020-03-20T15:17:27",
+  "LastExecuteTime": "2020-04-06T22:39:58.4903403+08:00",
+  "Projects": [
+    {
+      "ProjectPath": "DeployTool.Core\\bin\\Release\\netstandard2.1",
+      "TargetPath": "Batch\\batch",
+      "Selected": false,
+      "IgnoreRules": "*.[dD][lL][lL]"
+    },
+    {
+      "ProjectPath": "DeployTool.Infrastructure\\bin\\Release\\netstandard2.1",
+      "TargetPath": "Service\\WinService",
+      "Selected": false,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "DeployTool.SharedKernel\\bin\\Release",
+      "TargetPath": "Batch\\Housekeeping",
+      "Selected": false,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "DeployTool.Winform\\bin\\Release\\netcoreapp3.1",
+      "TargetPath": "DeployTool",
+      "Selected": true,
+      "IgnoreRules": ""
+    },
+    {
+      "ProjectPath": "InitialDataTransfer\\bin\\Release",
+      "TargetPath": "InitialDataTransfer",
+      "Selected": false,
+      "IgnoreRules": ""
+    }
+  ],
+  "IgnoreRules": ".git\r\n.vs\r\n.gitignore\r\nobj\r\nProperties\r\n*.csproj\r\n*.user\r\n*.vspscc",
+  "IsIgnoreCs": true,
+  "IsIgnoreConfig": true,
+  "IsKeepEmptyDir": false,
+  "IsCompression": true,
+  "IsBuild": true,
+  "IsCopyToFtp": false,
+  "CompressionPassword": "",
+  "FtpUrl": "ftp://192.168.100.135",
+  "FtpUserName": "itsower",
+  "FtpPassword": "html5!its",
+  "FtpPath": "/home/CAMS/Test",
+  "IsPublishToFtp": false,
+  "PublishFtpUrl": "ftp://192.168.100.135",
+  "PublishFtpUserName": "itsower",
+  "PublishFtpPassword": "html5!its",
+  "PublishFtpPath": "/home/CAMS/Test",
+  "IsPublishToDisk": false,
+  "DiskPath": "C:\\TestPulish",
+  "BuildConfiguration": "Release",
+  "MsBuildPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\MSBuild\\Current\\Bin\\MsBuild.exe",
+  "SlnPath": "C:\\github\\DeployTool\\DeployTool.sln"
+}
