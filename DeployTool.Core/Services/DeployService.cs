@@ -18,7 +18,7 @@ namespace DeployTool.Core.Services
     {
         private readonly ICatalogConfigRepository _catalogConfigRepository;
         private readonly ICatalogRepository _catalogRepository;
-        private readonly IWorkflowConfigRepository _workflowConfigRepository;
+        private readonly IDeployWorkConfigRepository _deployWorkConfigRepository;
         private readonly IFtpFactory _ftpFactory;
         private readonly ICompressor _compressor;
         private readonly ICodeBuilderFactory _codeBuilderFactory;
@@ -26,7 +26,7 @@ namespace DeployTool.Core.Services
 
         public DeployService(ICatalogConfigRepository catalogConfigRepository,
             ICatalogRepository catalogRepository,
-            IWorkflowConfigRepository workflowConfigRepository,
+            IDeployWorkConfigRepository deployWorkConfigRepository,
             IFtpFactory ftpFactory,
             ICompressor compressor,
             ICodeBuilderFactory codeBuilderFactory,
@@ -34,25 +34,25 @@ namespace DeployTool.Core.Services
         {
             _catalogConfigRepository = catalogConfigRepository;
             _catalogRepository = catalogRepository;
-            _workflowConfigRepository = workflowConfigRepository;
+            _deployWorkConfigRepository = deployWorkConfigRepository;
             _ftpFactory = ftpFactory;
             _compressor = compressor;
             _codeBuilderFactory = codeBuilderFactory;
             _appSettings = appSettings;
         }
-        public void ExecuteDeploy(WorkflowConfig workflowConfig)
+        public void ExecuteDeploy(DeployWorkConfig deployWorkConfig)
         {
-            var targetFolderName = workflowConfig.GetTargetFolderName();
+            var targetFolderName = deployWorkConfig.GetTargetFolderName();
             //編譯
-            if (workflowConfig.IsBuild)
+            if (deployWorkConfig.IsBuild)
             {
-                CodeBuild(workflowConfig);
+                CodeBuild(deployWorkConfig);
             }
 
-            var fileCopyMappingModels = workflowConfig.Projects
+            var fileCopyMappingModels = deployWorkConfig.Projects
                     //取得被選取的專案
                     .Where(r => r.Selected)
-                    .Select(p => new ProjectConfigModel(workflowConfig, p))
+                    .Select(p => new ProjectConfigModel(deployWorkConfig, p))
                     //取得所有資料夾
                     .ToProjectDirectoryDatas()
                     //取得所有檔案
@@ -66,9 +66,9 @@ namespace DeployTool.Core.Services
                     .ToList();
 
             //預先建立空資料夾
-            if (workflowConfig.IsKeepEmptyDir)
+            if (deployWorkConfig.IsKeepEmptyDir)
             {
-                CreateEmptyDirectory(workflowConfig);
+                CreateEmptyDirectory(deployWorkConfig);
             }
 
             //複製檔案
@@ -82,41 +82,41 @@ namespace DeployTool.Core.Services
 
 
             //壓縮
-            if (workflowConfig.IsCompression)
+            if (deployWorkConfig.IsCompression)
             {
-                Compression(workflowConfig);
+                Compression(deployWorkConfig);
             }
 
             //利用FTP發佈
-            if (workflowConfig.IsPublishToFtp)
+            if (deployWorkConfig.IsPublishToFtp)
             {
-                PublishToFtp(workflowConfig);
+                PublishToFtp(deployWorkConfig);
             }
 
             //利用磁碟機發佈
-            if (workflowConfig.IsPublishToDisk)
+            if (deployWorkConfig.IsPublishToDisk)
             {
-                PublishToDisk(workflowConfig);
+                PublishToDisk(deployWorkConfig);
             }
 
             //寫FileList Txt
-            WriteFileList(workflowConfig, fileCopyMappingModels.Select(r => r.TargetPath).ToList());
+            WriteFileList(deployWorkConfig, fileCopyMappingModels.Select(r => r.TargetPath).ToList());
         }
 
-        private void CodeBuild(WorkflowConfig workflowConfig)
+        private void CodeBuild(DeployWorkConfig deployWorkConfig)
         {
-            var codeBuilder = _codeBuilderFactory.Create(new MsBuildSetting(workflowConfig.MsBuildPath,
-                workflowConfig.SlnPath, workflowConfig.BuildConfiguration));
+            var codeBuilder = _codeBuilderFactory.Create(new MsBuildSetting(deployWorkConfig.MsBuildPath,
+                deployWorkConfig.SlnPath, deployWorkConfig.BuildConfiguration));
             codeBuilder.Build();
         }
 
-        private void CreateEmptyDirectory(WorkflowConfig workflowConfig)
+        private void CreateEmptyDirectory(DeployWorkConfig deployWorkConfig)
         {
-            var targetFolderName = workflowConfig.GetTargetFolderName();
-            workflowConfig.Projects
+            var targetFolderName = deployWorkConfig.GetTargetFolderName();
+            deployWorkConfig.Projects
                 //取得被選取的專案
                 .Where(r => r.Selected)
-                .Select(p => new ProjectConfigModel(workflowConfig, p))
+                .Select(p => new ProjectConfigModel(deployWorkConfig, p))
                 //取得所有資料夾
                 .ToProjectDirectoryDatas()
                 //依IgnoreRule設定排除檔案
@@ -126,45 +126,45 @@ namespace DeployTool.Core.Services
                 .CreateDirectory(targetFolderName);
         }
 
-        private void Compression(WorkflowConfig workflowConfig)
+        private void Compression(DeployWorkConfig deployWorkConfig)
         {
-            var targetDirectoryPath = workflowConfig.GetTargetDirectoryPath();
-            var compressionFileName = workflowConfig.GetCompressionFileName();
-            var compressionFilePath = workflowConfig.GetCompressionFilePath();
-            _compressor.Compress(targetDirectoryPath, compressionFilePath, workflowConfig.CompressionPassword);
+            var targetDirectoryPath = deployWorkConfig.GetTargetDirectoryPath();
+            var compressionFileName = deployWorkConfig.GetCompressionFileName();
+            var compressionFilePath = deployWorkConfig.GetCompressionFilePath();
+            _compressor.Compress(targetDirectoryPath, compressionFilePath, deployWorkConfig.CompressionPassword);
 
-            if (!workflowConfig.IsCopyToFtp) return;
+            if (!deployWorkConfig.IsCopyToFtp) return;
 
-            var ftpSetting = workflowConfig.FtpUserName == null
-                ? new FtpSetting(workflowConfig.FtpUserName)
-                : new FtpSetting(workflowConfig.FtpUrl, workflowConfig.FtpUserName, workflowConfig.FtpPassword);
+            var ftpSetting = deployWorkConfig.FtpUserName == null
+                ? new FtpSetting(deployWorkConfig.FtpUserName)
+                : new FtpSetting(deployWorkConfig.FtpUrl, deployWorkConfig.FtpUserName, deployWorkConfig.FtpPassword);
             using (var ftp = _ftpFactory.Create(ftpSetting))
             {
-                ftp.UploadFile(compressionFilePath, Path.Combine(workflowConfig.FtpPath, compressionFileName));
+                ftp.UploadFile(compressionFilePath, Path.Combine(deployWorkConfig.FtpPath, compressionFileName));
             }
         }
 
-        private void PublishToFtp(WorkflowConfig workflowConfig)
+        private void PublishToFtp(DeployWorkConfig deployWorkConfig)
         {
-            var directoryName = workflowConfig.GetTargetDirectoryPath();
-            var ftpSetting = workflowConfig.PublishFtpUserName == null
-                ? new FtpSetting(workflowConfig.PublishFtpUrl)
-                : new FtpSetting(workflowConfig.PublishFtpUrl, workflowConfig.PublishFtpUserName, workflowConfig.PublishFtpPassword);
+            var directoryName = deployWorkConfig.GetTargetDirectoryPath();
+            var ftpSetting = deployWorkConfig.PublishFtpUserName == null
+                ? new FtpSetting(deployWorkConfig.PublishFtpUrl)
+                : new FtpSetting(deployWorkConfig.PublishFtpUrl, deployWorkConfig.PublishFtpUserName, deployWorkConfig.PublishFtpPassword);
             using (var ftp = _ftpFactory.Create(ftpSetting))
             {
-                ftp.UploadDirectory(directoryName, workflowConfig.PublishFtpPath);
+                ftp.UploadDirectory(directoryName, deployWorkConfig.PublishFtpPath);
             }
         }
 
-        private void PublishToDisk(WorkflowConfig workflowConfig)
+        private void PublishToDisk(DeployWorkConfig deployWorkConfig)
         {
-            var directoryName = workflowConfig.GetTargetDirectoryPath();
-            DirectoryCopy(directoryName, workflowConfig.DiskPath, true);
+            var directoryName = deployWorkConfig.GetTargetDirectoryPath();
+            DirectoryCopy(directoryName, deployWorkConfig.DiskPath, true);
         }
 
-        private void WriteFileList(WorkflowConfig workflowConfig, List<string> fileList)
+        private void WriteFileList(DeployWorkConfig deployWorkConfig, List<string> fileList)
         {
-            var fileListPath = workflowConfig.GeFileListPath();
+            var fileListPath = deployWorkConfig.GeFileListPath();
             File.AppendAllText(fileListPath, string.Join("\r\n", fileList.ToArray()));
         }
 

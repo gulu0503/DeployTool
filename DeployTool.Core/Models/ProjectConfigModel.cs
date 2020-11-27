@@ -8,7 +8,7 @@ namespace DeployTool.Core.Models
 {
     public class ProjectConfigModel : ValueObject
     {
-        public string WorkflowTargetPath { get; set; }
+        public string DeployWorkTargetPath { get; set; }
         public string OriginalFullPath { get; set; }
         public DateTime LastWriteTime { get; set; }
         public string ProjectPath { get; set; }
@@ -17,30 +17,30 @@ namespace DeployTool.Core.Models
         public List<string> IgnoreRules { get; set; }
         public List<string> ExceptIgnoreRules { get; set; }
 
-        public ProjectConfigModel(WorkflowConfig workflowConfig, ProjectConfig projectConfig)
+        public ProjectConfigModel(DeployWorkConfig deployWorkConfig, ProjectConfig projectConfig)
         {
-            OriginalFullPath = Path.Combine(workflowConfig.OriginalPath, projectConfig.ProjectPath);
-            WorkflowTargetPath = workflowConfig.TargetPath;
-            LastWriteTime = workflowConfig.LastWriteTime;
+            OriginalFullPath = Path.Combine(deployWorkConfig.OriginalPath, projectConfig.ProjectPath);
+            DeployWorkTargetPath = deployWorkConfig.TargetPath;
+            LastWriteTime = deployWorkConfig.LastWriteTime;
 
             ProjectPath = projectConfig.ProjectPath;
             TargetPath = projectConfig.TargetPath;
             Selected = projectConfig.Selected;
 
-            IgnoreRules = GetIgnore(workflowConfig.IgnoreRules);
+            IgnoreRules = GetIgnore(deployWorkConfig.IgnoreRules);
             IgnoreRules.AddRange(GetIgnore(projectConfig.IgnoreRules));
-            if (workflowConfig.IsIgnoreCs)
+            if (deployWorkConfig.IsIgnoreCs)
             {
                 IgnoreRules.Add("*.[cC][sS]");
             }
-            if (workflowConfig.IsIgnoreConfig)
+            if (deployWorkConfig.IsIgnoreConfig)
             {
                 IgnoreRules.Add("[aA][pP][pP].[cC][oO][nN][fF][iI][gG]");
                 IgnoreRules.Add("[wW][eE][bB].[cC][oO][nN][fF][iI][gG]");
             }
             IgnoreRules = IgnoreRules.Distinct().ToList();
 
-            ExceptIgnoreRules = GetExceptIgnoreRules(workflowConfig.IgnoreRules);
+            ExceptIgnoreRules = GetExceptIgnoreRules(deployWorkConfig.IgnoreRules);
             ExceptIgnoreRules.AddRange(GetExceptIgnoreRules(projectConfig.IgnoreRules));
             ExceptIgnoreRules = ExceptIgnoreRules.Distinct().ToList();
         }

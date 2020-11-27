@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using DeployTool.SharedKernel.Exceptions;
@@ -20,16 +21,7 @@ namespace DeployTool.WinForm.Handlers
             try
             {
                 var ex = (Exception)e.ExceptionObject;
-                var errorMsg = "An application error occurred. Please contact the adminstrator with the following information:\n\n";
-
-                if (!EventLog.SourceExists("ThreadException"))
-                {
-                    EventLog.CreateEventSource("ThreadException", "Application");
-                }
-
-                EventLog myLog = new EventLog();
-                myLog.Source = "ThreadException";
-                myLog.WriteEntry(errorMsg + ex.Message + "\n\nStack Trace:\n" + ex.StackTrace);
+                WriteLog(ex);
             }
             catch (Exception exc)
             {
@@ -53,6 +45,7 @@ namespace DeployTool.WinForm.Handlers
             var result = DialogResult.Cancel;
             try
             {
+                WriteLog(e.Exception);
                 result = ShowThreadExceptionDialog("系統訊息", e.Exception);
             }
             catch
@@ -81,6 +74,14 @@ namespace DeployTool.WinForm.Handlers
                 CustomException _ => MessageBox.Show(e.Message, title),
                 _ => MessageBox.Show($"發生錯誤，請查看Log。\r\n\r\n{e.Message}", title)
             };
+        }
+
+        private static void WriteLog(Exception e)
+        {
+            var folderPath = Path.Combine(Application.StartupPath, "Logs");
+            if (!Directory.Exists(folderPath)) Directory.CreateDirectory("Logs");
+            var path = Path.Combine(folderPath, "Exception_" + DateTime.Now.ToString("yyyyMMdd") + ".txt");
+            File.AppendAllText(path, e.Message + "\r\n\r\nStack Trace:\r\n" + e.StackTrace);
         }
     }
 }

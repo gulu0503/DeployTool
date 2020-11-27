@@ -3,9 +3,9 @@ using DeployTool.Core.Repositories;
 
 namespace DeployTool.Core.Repositories
 {
-    public interface IWorkflowConfigRepository : IJsonRepository<WorkflowConfig>
+    public interface IDeployWorkConfigRepository : IJsonRepository<DeployWorkConfig>
     {
-        WorkflowConfig Read(string catalogName, string workflowName);
-        void Save(string catalogName, string workflowName, WorkflowConfig workflowConfig);
+        DeployWorkConfig Read(string catalogName, string deployWorkName);
+        void Save(string catalogName, string deployWorkName, DeployWorkConfig deployWorkConfig);
     }
 }

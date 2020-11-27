@@ -45,11 +45,11 @@ namespace DeployTool.WinForm
                 .Configure<AppSettings>(_ =>
                 {
                     configuration.GetSection("App").Bind(_);
-                    _.StartupPath = Application.StartupPath;
+                    _.ConfigPath = string.IsNullOrEmpty(_.ConfigPath) ? Application.StartupPath : _.ConfigPath;
                 });
 
             services.AddLogging();
-            services.AddTransient<IWorkflowConfigRepository, WorkflowConfigRepository>();
+            services.AddTransient<IDeployWorkConfigRepository, DeployWorkConfigRepository>();
             services.AddTransient<ICatalogConfigRepository, CatalogConfigRepository>();
             services.AddTransient<ICatalogRepository, CatalogRepository>();
             services.AddTransient<IFtpFactory, FtpFactory>();

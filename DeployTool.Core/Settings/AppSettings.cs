@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace DeployTool.Core.Settings
@@ -8,15 +9,15 @@ namespace DeployTool.Core.Settings
     {
         public string CatalogSettingPath { get; set; }
 
-        public string StartupPath { get; set; }
+        public string ConfigPath { get; set; }
 
-        public string GetWorkflowConfigPath(string catalogName, string workflowName)
+        public string GetDeployWorkConfigPath(string catalogName, string deployWorkName)
         {
-            return $"{StartupPath}\\configs\\{catalogName}\\{workflowName}.json";
+            return Path.Combine(ConfigPath, $"configs\\{catalogName}\\{deployWorkName}.json");
         }      
         public string GetCatalogFolderPath(string catalogName)
         {
-            return $"{StartupPath}\\configs\\{catalogName}";
+            return Path.Combine(ConfigPath, $"configs\\{catalogName}");
         }
     }
 }

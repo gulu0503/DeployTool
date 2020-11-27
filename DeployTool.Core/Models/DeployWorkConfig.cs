@@ -5,7 +5,7 @@ using DeployTool.SharedKernel;
 
 namespace DeployTool.Core.Models
 {
-    public class WorkflowConfig
+    public class DeployWorkConfig
     {
         public string OriginalPath { get; set; }
         public string TargetPath { get; set; }

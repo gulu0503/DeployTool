@@ -57,7 +57,7 @@ namespace DeployTool.WinForm
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void OpenWorkflowConfig_Click(object sender, EventArgs e)
+        private void OpenDeployWorkConfig_Click(object sender, EventArgs e)
         {
         }
 
@@ -88,7 +88,7 @@ namespace DeployTool.WinForm
         {
 
         }
-        private void CboWorkflow_SelectedIndexChanged(object sender, EventArgs e)
+        private void CboDeployWork_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
 

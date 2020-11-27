@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DeployTool.Core.Models;
-using DeployTool.Ui.Models;
+using DeployTool.WinForm.Models;
 
 namespace DeployTool.Ui.AutoMapper
 {
@@ -8,8 +8,8 @@ namespace DeployTool.Ui.AutoMapper
     {
         public MappingProfile()
         {
-            CreateMap<WorkflowConfig, WorkflowConfigDto>();
-            CreateMap<WorkflowConfigDto, WorkflowConfig>();
+            CreateMap<DeployWorkConfig, DeployWorkConfigDto>();
+            CreateMap<DeployWorkConfigDto, DeployWorkConfig>();
             CreateMap<ProjectConfig, ProjectConfigDto>();
             CreateMap<ProjectConfigDto, ProjectConfig>();
         }

@@ -74,7 +74,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.tbDiskPath = new System.Windows.Forms.TextBox();
             this.cboCatalog = new System.Windows.Forms.ComboBox();
-            this.cboWorkflow = new System.Windows.Forms.ComboBox();
+            this.cboDeployWork = new System.Windows.Forms.ComboBox();
             this.chkIsBuild = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -360,7 +360,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "開啟設定檔";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.OpenWorkflowConfig_Click);
+            this.button2.Click += new System.EventHandler(this.OpenDeployWorkConfig_Click);
             // 
             // button3
             // 
@@ -587,15 +587,15 @@
             this.cboCatalog.Size = new System.Drawing.Size(160, 23);
             this.cboCatalog.TabIndex = 8;
             // 
-            // cboWorkflow
+            // cboDeployWork
             // 
-            this.cboWorkflow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboWorkflow.FormattingEnabled = true;
-            this.cboWorkflow.Location = new System.Drawing.Point(195, 15);
-            this.cboWorkflow.Margin = new System.Windows.Forms.Padding(4);
-            this.cboWorkflow.Name = "cboWorkflow";
-            this.cboWorkflow.Size = new System.Drawing.Size(141, 23);
-            this.cboWorkflow.TabIndex = 8;
+            this.cboDeployWork.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboDeployWork.FormattingEnabled = true;
+            this.cboDeployWork.Location = new System.Drawing.Point(195, 15);
+            this.cboDeployWork.Margin = new System.Windows.Forms.Padding(4);
+            this.cboDeployWork.Name = "cboDeployWork";
+            this.cboDeployWork.Size = new System.Drawing.Size(141, 23);
+            this.cboDeployWork.TabIndex = 8;
             // 
             // chkIsBuild
             // 
@@ -810,7 +810,7 @@
             this.ClientSize = new System.Drawing.Size(1344, 725);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.cboWorkflow);
+            this.Controls.Add(this.cboDeployWork);
             this.Controls.Add(this.cboCatalog);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox4);
@@ -888,7 +888,7 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbDiskPath;
         private System.Windows.Forms.ComboBox cboCatalog;
-        private System.Windows.Forms.ComboBox cboWorkflow;
+        private System.Windows.Forms.ComboBox cboDeployWork;
         private System.Windows.Forms.CheckBox chkIsBuild;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label14;

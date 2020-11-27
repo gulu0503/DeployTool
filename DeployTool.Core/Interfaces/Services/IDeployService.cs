@@ -7,6 +7,6 @@ namespace DeployTool.Core.Interfaces.Services
 {
     public interface IDeployService
     {
-        void ExecuteDeploy(WorkflowConfig workflowConfig);
+        void ExecuteDeploy(DeployWorkConfig deployWorkConfig);
     }
 }

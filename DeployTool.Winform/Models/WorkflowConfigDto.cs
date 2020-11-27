@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DeployTool.Ui.Models
+namespace DeployTool.WinForm.Models
 {
-    public class WorkflowConfigDto
+    public class DeployWorkConfigDto
     {
         public string OriginalPath { get; set; }
         public string TargetPath { get; set; }

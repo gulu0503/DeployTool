@@ -1,4 +1,4 @@
-﻿namespace DeployTool.Ui.Models
+﻿namespace DeployTool.WinForm.Models
 {
     public class ProjectConfigDto
     {

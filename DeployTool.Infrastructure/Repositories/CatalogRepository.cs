@@ -17,13 +17,13 @@ namespace DeployTool.Infrastructure.Repositories
         }
         public List<string> GetCatalogs()
         {
-            var directories = Directory.EnumerateDirectories($"{_appSettings.Value.StartupPath}\\configs");
+            var directories = Directory.EnumerateDirectories(Path.Combine(_appSettings.Value.ConfigPath, "configs"));
             return directories.Select(r => r.Split('\\').Last()).ToList();
         }
 
         public List<string> GetWorkFlowConfigs(string catalogName)
         {
-            var files = Directory.EnumerateFiles($"{_appSettings.Value.StartupPath}\\configs\\{catalogName}");
+            var files = Directory.EnumerateFiles(Path.Combine(_appSettings.Value.ConfigPath, "configs", catalogName));
             return files.Select(Path.GetFileNameWithoutExtension).ToList();
         }
     }

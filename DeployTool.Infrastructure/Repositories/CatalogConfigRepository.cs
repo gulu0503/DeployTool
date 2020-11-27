@@ -18,7 +18,7 @@ namespace DeployTool.Infrastructure.Repositories
 
         public CatalogConfig Read()
         {
-            var path = $"{_appSettings.Value.StartupPath}\\configs\\CatalogSetting.json";
+            var path = Path.Combine(_appSettings.Value.ConfigPath, "configs", "CatalogSetting.json");
             var json = File.ReadAllText(path);
             var projectConfig = JsonConvert.DeserializeObject<CatalogConfig>(json);
             return projectConfig;
@@ -26,8 +26,8 @@ namespace DeployTool.Infrastructure.Repositories
 
         public void Save(CatalogConfig data)
         {
-            var path = $"{_appSettings.Value.StartupPath}\\configs\\CatalogSetting.json";
-            var json = JsonConvert.SerializeObject(data);
+            var path = Path.Combine(_appSettings.Value.ConfigPath, "configs", "CatalogSetting.json");
+            var json = JsonConvert.SerializeObject(data,Formatting.Indented);
             File.WriteAllText(path, json);
         }
     }

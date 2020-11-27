@@ -118,7 +118,7 @@ namespace DeployTool
                 var dataAllDirectoryDatas = item.allDirectoryDatas;
                 foreach (var directoryData in dataAllDirectoryDatas)
                 {
-                    var directoryName = Path.Combine(projectConfig.WorkflowTargetPath, targetFolderName, projectConfig.TargetPath, directoryData.Path);
+                    var directoryName = Path.Combine(projectConfig.DeployWorkTargetPath, targetFolderName, projectConfig.TargetPath, directoryData.Path);
                     if (!Directory.Exists(directoryName)) Directory.CreateDirectory(directoryName);
                 }
             }
@@ -132,7 +132,7 @@ namespace DeployTool
                 {
                     yield return new FileCopyMappingModel(
                         fileData.FileInfo,
-                        Path.Combine(projectData.projectConfig.WorkflowTargetPath , targetFolderName, projectData.projectConfig.TargetPath, fileData.Path));
+                        Path.Combine(projectData.projectConfig.DeployWorkTargetPath , targetFolderName, projectData.projectConfig.TargetPath, fileData.Path));
                 }
             }
         }
