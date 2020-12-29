@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{95AC9726-4400-4859-8401-A7E55192BF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeployTool.Core", "DeployTool.Core\DeployTool.Core.csproj", "{FD7442BD-3A72-42AA-8B75-4898D0519BE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployTool.Core", "DeployTool.Core\DeployTool.Core.csproj", "{FD7442BD-3A72-42AA-8B75-4898D0519BE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeployTool.Infrastructure", "DeployTool.Infrastructure\DeployTool.Infrastructure.csproj", "{ADD6EE84-C3E2-4D98-B262-1D540EAF678D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployTool.Infrastructure", "DeployTool.Infrastructure\DeployTool.Infrastructure.csproj", "{ADD6EE84-C3E2-4D98-B262-1D540EAF678D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeployTool.WinForm", "DeployTool.Winform\DeployTool.WinForm.csproj", "{F947C80A-1EC8-4AE4-94AB-D7B7E7376D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployTool.WinForm", "DeployTool.Winform\DeployTool.WinForm.csproj", "{F947C80A-1EC8-4AE4-94AB-D7B7E7376D98}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeployTool.SharedKernel", "DeployTool.SharedKernel\DeployTool.SharedKernel.csproj", "{74A02F83-6145-47CF-957D-9A27EED03587}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeployTool.SharedKernel", "DeployTool.SharedKernel\DeployTool.SharedKernel.csproj", "{74A02F83-6145-47CF-957D-9A27EED03587}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,12 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Jeffery|Any CPU.ActiveCfg = Release|Any CPU
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Jeffery|Any CPU.Build.0 = Release|Any CPU
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{95AC9726-4400-4859-8401-A7E55192BF91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD7442BD-3A72-42AA-8B75-4898D0519BE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FD7442BD-3A72-42AA-8B75-4898D0519BE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD7442BD-3A72-42AA-8B75-4898D0519BE1}.Jeffery|Any CPU.ActiveCfg = Debug|Any CPU
