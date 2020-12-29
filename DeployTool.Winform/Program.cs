@@ -1,6 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.Loader;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using AutoMapper;
@@ -23,6 +27,29 @@ namespace DeployTool.WinForm
         [STAThread]
         static void Main()
         {
+            if (!Directory.Exists(Path.Combine(Application.StartupPath, "configs")))
+            {
+                var currentDirectoryPath = Directory.GetCurrentDirectory();
+                Directory.CreateDirectory(Path.Combine(currentDirectoryPath, "configs"));
+                Directory.CreateDirectory(Path.Combine(currentDirectoryPath, "configs", "DeployTool"));
+
+                var assembly = Assembly.GetExecutingAssembly();
+                string assemblyName = assembly.GetName().Name;
+
+                var catalogSettingStream = assembly.GetManifestResourceStream(assemblyName+ ".ConfigTemplate.configs.CatalogSetting.json");
+                using (var fileStream = File.Create(Path.Combine(currentDirectoryPath, "configs", "CatalogSetting.json")))
+                {
+                    catalogSettingStream.Seek(0, SeekOrigin.Begin);
+                    catalogSettingStream.CopyTo(fileStream);
+                }
+                var configStream = assembly.GetManifestResourceStream(assemblyName + ".ConfigTemplate.configs.DeployTool.config.json");
+                using (var fileStream = File.Create(Path.Combine(currentDirectoryPath, "configs", "DeployTool", "config.json")))
+                {
+                    configStream.Seek(0, SeekOrigin.Begin);
+                    configStream.CopyTo(fileStream);
+                }
+            }
+
             ExceptionHandler.HandleException();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
@@ -30,7 +57,6 @@ namespace DeployTool.WinForm
             var services = new ServiceCollection();
             ConfigureServices(services);
             var serviceProvider = services.BuildServiceProvider();
-
             Application.Run(serviceProvider.GetService<DeployTool.WinForm.MainForm>());
         }
 

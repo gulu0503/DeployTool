@@ -53,7 +53,7 @@ namespace DeployTool.WinForm
             _catalogConfigRepository.Save(new CatalogConfig()
             {
                 CurrentCatalog = currentCatalog,
-                CurrentDeployWork = currentWorkFlow
+                CurrentWorkFlow = currentWorkFlow
             });
         }
 
@@ -239,7 +239,7 @@ namespace DeployTool.WinForm
             var catalogs = _catalogRepository.GetCatalogs();
             var catalogConfig = _catalogConfigRepository.Read();
             var currentCatalog = catalogConfig.CurrentCatalog;
-            var currentWorkFlow = catalogConfig.CurrentDeployWork;
+            var currentWorkFlow = catalogConfig.CurrentWorkFlow;
 
             cboCatalog.DataSource = catalogs;
             cboCatalog.SelectedIndex = cboCatalog.FindStringExact(currentCatalog);

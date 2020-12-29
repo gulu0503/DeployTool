@@ -4,8 +4,18 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <AssemblyName>DeployTool</AssemblyName>
+    <AssemblyName>DeployTool.WinForm</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ConfigTemplate\configs\CatalogSetting.json" />
+    <None Remove="ConfigTemplate\configs\DeployTool\config.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigTemplate\configs\CatalogSetting.json" />
+    <EmbeddedResource Include="ConfigTemplate\configs\DeployTool\config.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
